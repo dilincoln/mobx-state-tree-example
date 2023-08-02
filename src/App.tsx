@@ -5,9 +5,11 @@ import { Users } from './components/Users'
 function App() {
 	return (
 		<div>
-			<h1>Todos</h1>
+			<h1>Users</h1>
 
 			<CreateUser />
+
+			<hr />
 
 			<Users />
 		</div>

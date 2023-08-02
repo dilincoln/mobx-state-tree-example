@@ -1,22 +1,20 @@
-import { useState } from 'react'
+import { faker } from '@faker-js/faker'
 import { rootStore } from '../stores'
 
 const CreateUser = () => {
-	const [userName, setUserName] = useState<string>('')
-
 	const handleAddUser = () => {
-		if (!userName) {
-			return
-		}
-
-		rootStore.addUser(userName)
+		rootStore.createUser(faker.internet.userName())
 	}
 
 	return (
-		<div>
-			<span>Add User</span>
-			<input type='text' value={userName} onChange={(e) => setUserName(e.target.value)} />
-			<button onClick={handleAddUser}>Add</button>
+		<div
+			style={{
+				display: 'flex',
+				gap: '1rem',
+				alignItems: 'center',
+			}}
+		>
+			<button onClick={handleAddUser}>Add random User</button>
 		</div>
 	)
 }

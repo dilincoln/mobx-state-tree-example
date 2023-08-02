@@ -1,21 +1,13 @@
-import { types } from 'mobx-state-tree'
-import { todo, user } from './todos'
+import { Root } from '../models/Root'
+import { todoActions, todoViews } from '../models/Todo'
+import { userActions } from '../models/User/actions'
 
-const RootStore = types
-	.model({
-		users: types.array(user),
-		todos: types.optional(types.array(todo), []),
-	})
-	.actions((self) => ({
-		addUser(userName: string) {
-			const id = Math.random().toString() + Date.now().toString()
-
-			self.users.push({
-				id,
-				name: userName,
-			})
-		},
-	}))
+const RootStore = Root.actions((self) => ({
+	...todoActions(self),
+	...userActions(self),
+})).views((self) => ({
+	...todoViews(self),
+}))
 
 const rootStore = RootStore.create({})
 
